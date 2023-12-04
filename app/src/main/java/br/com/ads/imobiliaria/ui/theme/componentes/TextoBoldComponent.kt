@@ -19,6 +19,6 @@ fun TextoBoldComponent (texto : String) {
         text = texto,
         fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.onTertiary
+        color = MaterialTheme.colorScheme.onPrimary
     )
 }

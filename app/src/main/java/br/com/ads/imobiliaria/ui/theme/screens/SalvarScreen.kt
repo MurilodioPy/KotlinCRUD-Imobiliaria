@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -53,42 +52,6 @@ fun SalvarScreen(
             inquilinos = inquilinoDAO.obterTodos()
             var imoveis by remember { mutableStateOf(listOf<Imovel>()) }
             imoveis = imovelDAO.obterTodos()
-            var selectedCpf by remember{ mutableStateOf("") }
-            val listState = rememberLazyListState()
-
-//            LazyColumn(state = listState,
-//                modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
-//            ) {
-//                items(proprietarios) { proprietario ->
-//                    blocoProprietario(proprietario, selectedCpf){ newSelectedCpf ->
-//                        selectedCpf = newSelectedCpf
-//                    }
-//                }
-//            }
-//            DivisorComponent()
-//
-//            LazyColumn(state = listState,
-//                modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
-//            ) {
-//                items(inquilinos) { inquilino ->
-//                    blocoInquilino(inquilino, selectedCpf){ newSelectedCpf ->
-//                        selectedCpf = newSelectedCpf
-//                    }
-//                }
-//            }
-//
-//            DivisorComponent()
-//
-//            LazyColumn(state = listState,
-//                modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
-//            ) {
-//                items(inquilinos) { inquilino ->
-//                    blocoInquilino(inquilino, selectedCpf){ newSelectedCpf ->
-//                        selectedCpf = newSelectedCpf
-//                    }
-//                }
-//            }
-
             Button(
                 onClick = {
                     inquilinoDAO.salvarArquivosInquilinos()

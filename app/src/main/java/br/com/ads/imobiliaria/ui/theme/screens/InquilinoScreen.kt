@@ -69,7 +69,7 @@ fun InquilinoScreen(
                 modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
             ) {
                 items(inquilinos) { inquilino ->
-                    blocoInquilino(inquilino, selectedCpf){ newSelectedCpf ->
+                    BlocoInquilino(inquilino, selectedCpf){ newSelectedCpf ->
                         selectedCpf = newSelectedCpf
                     }
                 }
@@ -163,7 +163,7 @@ fun InquilinoScreen(
 }
 
 @Composable
-fun blocoInquilino(inquilino: Inquilino, selectedCpf: String, onSelectedCpfChange: (String) -> Unit){
+fun BlocoInquilino(inquilino: Inquilino, selectedCpf: String, onSelectedCpfChange: (String) -> Unit){
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)

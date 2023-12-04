@@ -182,7 +182,7 @@ fun BlocoImovel(imovel: Imovel, selectedCpf: String, onSelectedCpfChange: (Strin
         ) {
             ImagemCardComponent()
             Column {
-                TextoBoldComponent("Matricula Imovel: " + matriculaImovel)
+                TextoBoldComponent("Matrícula Imovel: " + matriculaImovel)
                 TextoBoldComponent("Endereço: " + imovel.endereco)
                 TextoBoldComponent("Valor Aluguel: " + imovel.valoraluguel.toString())
             }

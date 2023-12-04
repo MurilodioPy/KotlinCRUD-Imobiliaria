@@ -4,11 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -19,10 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import br.com.ads.imobiliaria.navigation.AppDestination
 import br.com.ads.imobiliaria.ui.theme.ImobiliariaTheme
-import br.com.ads.imobiliaria.ui.theme.componentes.BotaoSalvar
 import br.com.ads.imobiliaria.ui.theme.componentes.CardComponent
-import br.com.ads.imobiliaria.ui.theme.componentes.DivisorComponent
-import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponentNoBack
 
 @Composable
@@ -33,7 +28,6 @@ fun PrincipalScreen(navController: NavHostController) {
         }
     ) { innerPadding ->
         val telas = arrayListOf(
-            AppDestination.Locacao.route,
             AppDestination.Imovel.route,
             AppDestination.Proprietario.route,
             AppDestination.Inqulino.route,

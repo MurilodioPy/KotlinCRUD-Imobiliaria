@@ -18,7 +18,6 @@ import br.com.ads.imobiliaria.navigation.AppDestination
 import br.com.ads.imobiliaria.ui.theme.ImobiliariaTheme
 import br.com.ads.imobiliaria.ui.theme.screens.ImovelScreen
 import br.com.ads.imobiliaria.ui.theme.screens.InquilinoScreen
-import br.com.ads.imobiliaria.ui.theme.screens.LocacaoScreen
 import br.com.ads.imobiliaria.ui.theme.screens.PrincipalScreen
 import br.com.ads.imobiliaria.ui.theme.screens.ProprietarioScreen
 import br.com.ads.imobiliaria.ui.theme.screens.SalvarScreen
@@ -28,7 +27,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ImobiliariaTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -62,9 +60,6 @@ fun MyApp(proprietarioDAO: ProprietarioDAO, imovelDAO: ImovelDAO, inquilinoDAO: 
         }
         composable(AppDestination.Imovel.route) {
             ImovelScreen(imovelDAO = imovelDAO, navController = navController)
-        }
-        composable(AppDestination.Locacao.route) {
-            LocacaoScreen(proprietarioDAO = proprietarioDAO, imovelDAO = imovelDAO, inquilinoDAO = inquilinoDAO, navController = navController)
         }
         composable(AppDestination.Salvar.route) {
             SalvarScreen(proprietarioDAO = proprietarioDAO, imovelDAO = imovelDAO, inquilinoDAO = inquilinoDAO, navController = navController)
