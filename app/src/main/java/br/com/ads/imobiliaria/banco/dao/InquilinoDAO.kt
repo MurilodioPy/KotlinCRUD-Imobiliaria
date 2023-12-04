@@ -9,6 +9,8 @@ import br.com.ads.imobiliaria.banco.BancoImoveis
 import br.com.ads.imobiliaria.model.Inquilino
 import java.io.File
 import java.io.FileOutputStream
+import java.io.FileWriter
+import java.io.OutputStream
 
 class InquilinoDAO(context: Context) {
 
@@ -54,8 +56,9 @@ class InquilinoDAO(context: Context) {
         meuBanco.delete("Inquilino", "cpf = ?", arrayOf(cpf))
     }
 
-    fun salvarArquivosInquilinos(){
-        val dados = StringBuilder()
+    fun salvarArquivosInquilinos(): String {
+        val dadosBuilder = StringBuilder()
+
         val cursor: Cursor = meuBanco.rawQuery("SELECT * FROM Inquilino", null)
 
         while (cursor.moveToNext()) {
@@ -63,15 +66,18 @@ class InquilinoDAO(context: Context) {
             val nome = cursor.getString(cursor.getColumnIndexOrThrow("nome"))
             val imovel = cursor.getString(cursor.getColumnIndexOrThrow("imovel"))
             val valorCaucaoDepositado = cursor.getFloat(cursor.getColumnIndexOrThrow("valor_caucao_depositado"))
+            //println(cpf)
             val inquilino = Inquilino(cpf, nome, valorCaucaoDepositado, imovel)
-            dados.append("${inquilino}\n")
+            dadosBuilder.append("$cpf, $nome, $valorCaucaoDepositado, $imovel\n")
         }
         cursor.close()
 
-        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val file = File(path, "inquilinos.txt")
-        val outputStream = FileOutputStream(file)
-        outputStream.write(dados.toString().toByteArray())
-        outputStream.close()
+
+
+        return dadosBuilder.toString()
     }
+
+
+
+
 }

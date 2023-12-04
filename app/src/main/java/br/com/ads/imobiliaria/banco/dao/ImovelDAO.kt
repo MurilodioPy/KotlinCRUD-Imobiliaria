@@ -49,7 +49,7 @@ class ImovelDAO(context: Context) {
         meuBanco.delete("Imovel", "matricula = ?", arrayOf(matricula))
     }
 
-    fun salvarArquivosImoveis(){
+    fun salvarArquivosImoveis(): String{
         val dados = StringBuilder()
         val cursor: Cursor = meuBanco.rawQuery("SELECT * FROM Imovel", null)
 
@@ -62,10 +62,6 @@ class ImovelDAO(context: Context) {
         }
         cursor.close()
 
-        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val file = File(path, "Imoveis.txt")
-        val outputStream = FileOutputStream(file)
-        outputStream.write(dados.toString().toByteArray())
-        outputStream.close()
+        return dados.toString()
     }
 }

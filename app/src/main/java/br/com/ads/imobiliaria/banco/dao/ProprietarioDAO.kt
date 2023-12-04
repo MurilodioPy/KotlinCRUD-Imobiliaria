@@ -53,7 +53,7 @@ class ProprietarioDAO(context: Context) {
         meuBanco.delete("Proprietario", "cpf = ?", arrayOf(cpf))
     }
 
-    fun salvarArquivosProprietarios(){
+    fun salvarArquivosProprietarios(): String{
         val dados = StringBuilder()
         val cursor: Cursor = meuBanco.rawQuery("SELECT * FROM Proprietario", null)
 
@@ -67,10 +67,7 @@ class ProprietarioDAO(context: Context) {
         }
         cursor.close()
 
-        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val file = File(path, "proprietarios.txt")
-        val outputStream = FileOutputStream(file)
-        outputStream.write(dados.toString().toByteArray())
-        outputStream.close()
+        return dados.toString()
+
     }
 }
