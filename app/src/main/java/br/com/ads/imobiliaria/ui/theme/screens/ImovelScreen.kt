@@ -36,7 +36,8 @@ import br.com.ads.imobiliaria.model.Imovel
 import br.com.ads.imobiliaria.ui.theme.componentes.ImagemCardComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TextoBoldComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponent
-import br.com.ads.imobiliaria.ui.theme.componentes.editTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.EditTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.TextoComponent
 
 @Composable
 fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
@@ -57,7 +58,7 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
             imoveis = imovelDAO.obterTodos()
             var selectedMatricula by remember{mutableStateOf("")}
             val listState = rememberLazyListState()
-
+            //MOSTRAR LISTA DE IMOVEIS
             LazyColumn(state = listState,
                 modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
             ) {
@@ -68,16 +69,11 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
                 }
             }
             var isInputEmpty by rememberSaveable { mutableStateOf(false) }
-            val matricula = editTextComponent("Matricula", isInputEmpty)
-            val endereco = editTextComponent("Endereço", isInputEmpty)
-            val valorAluguel = editTextComponent("Valor Aluguel", isInputEmpty)
-            if (isInputEmpty) {
-                Text(
-                    text = "Campos necessários",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
+            val matricula = EditTextComponent("Matricula", isInputEmpty)
+            val endereco = EditTextComponent("Endereço", isInputEmpty)
+            val valorAluguel = EditTextComponent("Valor Aluguel", isInputEmpty)
+
+            //INSERIR IMOVEL
             Button(
                 onClick = {
                     if(endereco.isNotEmpty() && matricula.isNotEmpty()){
@@ -86,6 +82,7 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
                     }else{
                         isInputEmpty = true
                     }
+                    //ATUALIZANDO LISTA
                     imoveis = imovelDAO.obterTodos()
                 },
                 Modifier
@@ -96,12 +93,9 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Inserir",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Inserir")
             }
-
+            //DELETAR IMOVEL
             Button(
                 onClick = {
                     if(selectedMatricula.isNotEmpty()){
@@ -117,12 +111,9 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Deletar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Deletar")
             }
-
+            //EDITAR IMOVEL
             Button(
                 onClick = {
                     if(endereco.isNotEmpty() && valorAluguel.isNotEmpty()){
@@ -141,10 +132,7 @@ fun ImovelScreen(imovelDAO: ImovelDAO, navController: NavHostController) {
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Editar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Editar")
             }
         }
     }

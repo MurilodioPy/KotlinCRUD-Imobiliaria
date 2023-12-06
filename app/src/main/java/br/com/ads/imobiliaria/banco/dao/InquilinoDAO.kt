@@ -68,11 +68,9 @@ class InquilinoDAO(context: Context) {
             val valorCaucaoDepositado = cursor.getFloat(cursor.getColumnIndexOrThrow("valor_caucao_depositado"))
             //println(cpf)
             val inquilino = Inquilino(cpf, nome, valorCaucaoDepositado, imovel)
-            dadosBuilder.append("$cpf, $nome, $valorCaucaoDepositado, $imovel\n")
+            dadosBuilder.append("${inquilino}\n")
         }
         cursor.close()
-
-
 
         return dadosBuilder.toString()
     }

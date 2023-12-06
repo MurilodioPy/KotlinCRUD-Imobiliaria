@@ -26,6 +26,11 @@ open class Inquilino(
     }
 
     override fun toString(): String {
-        return "CPF: " +this.cpf+" - Nome: " +this.nome + " - Valor Caução: " + this.valorCaucaoDepositado + " - Imovel: " +this.imovel
+        return "CPF: " +this.cpf +
+                "\nNome: " +this.nome +
+                "\nValor Caução: " + this.valorCaucaoDepositado +
+                "\nImovel: " +this.imovel + "" +
+                "\n------------------------------------------------------"
+
     }
 }

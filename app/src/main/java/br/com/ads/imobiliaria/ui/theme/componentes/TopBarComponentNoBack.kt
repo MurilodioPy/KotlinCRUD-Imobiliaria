@@ -17,7 +17,7 @@ fun TopBarComponentNoBack(titulo: String) {
             actionIconContentColor = MaterialTheme.colorScheme.onSecondary,
         ),
         title = {
-            Texto(titulo)
+            TextoComponent(titulo)
         }
     )
 }

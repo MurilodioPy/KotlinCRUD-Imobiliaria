@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -22,9 +24,8 @@ import androidx.navigation.NavHostController
 import br.com.ads.imobiliaria.banco.dao.ImovelDAO
 import br.com.ads.imobiliaria.banco.dao.InquilinoDAO
 import br.com.ads.imobiliaria.banco.dao.ProprietarioDAO
-import br.com.ads.imobiliaria.model.Imovel
-import br.com.ads.imobiliaria.model.Inquilino
-import br.com.ads.imobiliaria.model.Proprietario
+import br.com.ads.imobiliaria.ui.theme.componentes.MostrarSalvoComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.TextoComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponent
 import java.io.BufferedReader
 import java.io.File
@@ -40,6 +41,8 @@ fun SalvarScreen(
 ) {
 
     val context = LocalContext.current
+    val nomeArquivo = "meu_arquivo.txt"
+    var mostrarArquivo by remember{ mutableStateOf("") }
 
     fun criarArquivoTexto(nomeArquivo: String, conteudo: String) {
         try {
@@ -70,10 +73,8 @@ fun SalvarScreen(
             e.printStackTrace()
             // Tratar exceção conforme necessário
         }
-
         return stringBuilder.toString()
     }
-
     Scaffold(
         topBar = {
             TopBarComponent("Salvar Arquivos", navController)
@@ -87,26 +88,16 @@ fun SalvarScreen(
 //                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-         /*   var proprietarios by remember { mutableStateOf(listOf<Proprietario>()) }
-            proprietarios = proprietarioDAO.obterTodos()
-            var inquilinos by remember { mutableStateOf(listOf<Inquilino>()) }
-            inquilinos = inquilinoDAO.obterTodos()
-            var imoveis by remember { mutableStateOf(listOf<Imovel>()) }
-            imoveis = imovelDAO.obterTodos()*/
             Button(
                 onClick = {
                     var texto1 = inquilinoDAO.salvarArquivosInquilinos()
                     var texto2 = proprietarioDAO.salvarArquivosProprietarios()
-                    var texto3 =imovelDAO.salvarArquivosImoveis()
-                    val nomeArquivo = "meu_arquivo.txt"
-
-                    var text = texto1 + texto2 + texto3
+                    var texto3 = imovelDAO.salvarArquivosImoveis()
+                    var text = "INQUILINOS:\n\n " + texto1 + "\nPROPRIETÁRIOS:\n\n " + texto2 +"\nIMÓVEIS:\n\n "+ texto3
 
                     criarArquivoTexto(nomeArquivo, text)
-
-                    val textoRecuperado = lerArquivoTexto(nomeArquivo)
-
-                    println(textoRecuperado)
+                    mostrarArquivo = lerArquivoTexto(nomeArquivo)
+                    println(mostrarArquivo)
                 },
                 Modifier
                     .padding(
@@ -121,7 +112,18 @@ fun SalvarScreen(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.secondary)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if(lerArquivoTexto(nomeArquivo).isNotEmpty()){
+                    mostrarArquivo = lerArquivoTexto(nomeArquivo)
+                    MostrarSalvoComponent(mostrarArquivo)
+                }
+            }
         }
     }
 }

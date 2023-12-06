@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun editTextComponent(placeholder:String, isLetterEmpty: Boolean) : String {
+fun EditTextComponent(placeholder:String, isLetterEmpty: Boolean) : String {
     var inputText by remember { mutableStateOf("") }
     TextField(
         value = inputText,
@@ -56,5 +56,12 @@ fun editTextComponent(placeholder:String, isLetterEmpty: Boolean) : String {
         },
         isError = isLetterEmpty
     )
+    if (isLetterEmpty) {
+        Text(
+            text = "Campo obrigatório",
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall
+        )
+    }
     return inputText
 }

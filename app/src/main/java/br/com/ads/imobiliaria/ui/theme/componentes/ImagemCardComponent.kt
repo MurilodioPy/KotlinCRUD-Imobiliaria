@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import br.com.ads.imobiliaria.R
 
 @Composable
-fun ImagemCardComponent() { //id da imagem do tema como argumento!
+fun ImagemCardComponent() {
     Image(
         painter = painterResource(R.drawable.casa),
         contentDescription = null,

@@ -24,7 +24,10 @@ open class Imovel constructor(
     }
 
     override fun toString(): String {
-        return "Matricula: " +this.matricula+" - Endereço: " +this.endereco + " - Valor Aluguel: " + this.valoraluguel
+        return "Matricula: " +this.matricula +
+                "\nEndereço: " +this.endereco +
+                "\nValor Aluguel: " + this.valoraluguel + "" +
+                "\n------------------------------------------------------"
     }
 }
 

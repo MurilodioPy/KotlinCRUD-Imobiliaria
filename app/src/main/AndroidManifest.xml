@@ -7,7 +7,7 @@
 
 
     <uses-permission android:name="android.permission.Inte"
-        android:maxSdkVersion="32" />
+        android:maxSdkVersion="34" />
 
     <application
         android:allowBackup="true"

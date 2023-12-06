@@ -20,16 +20,13 @@ import br.com.ads.imobiliaria.model.Imovel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuImoveisComponent(
-    items: List<Imovel>,
+    imoveis: List<Imovel>,
     onItemClick: (String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableStateOf("") }
 
     ExposedDropdownMenuBox(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(6.dp),
         expanded = expanded,
         onExpandedChange = { expanded = it },
     ) {
@@ -49,12 +46,12 @@ fun MenuImoveisComponent(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primary)
         ) {
-            items.forEach { item ->
+            imoveis.forEach { imovel ->
                 DropdownMenuItem(
-                    text = { Text(text = item.matricula) },
-                    onClick = { selectedItem = item.matricula
+                    text = { Text(text = imovel.matricula) },
+                    onClick = { selectedItem = imovel.matricula
                         expanded = false
-                        onItemClick(item.matricula)
+                        onItemClick(imovel.matricula)
                     }
                 )
             }

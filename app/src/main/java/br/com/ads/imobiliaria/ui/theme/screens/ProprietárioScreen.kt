@@ -38,7 +38,8 @@ import br.com.ads.imobiliaria.ui.theme.componentes.ImagemCardComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.MenuImoveisComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TextoBoldComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponent
-import br.com.ads.imobiliaria.ui.theme.componentes.editTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.EditTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.TextoComponent
 
 @Composable
 fun ProprietarioScreen(
@@ -76,17 +77,10 @@ fun ProprietarioScreen(
             }
 
             var isInputEmpty by rememberSaveable { mutableStateOf(false) }
-            val cpf = editTextComponent("CPF", isInputEmpty)
-            val nome = editTextComponent("Nome", isInputEmpty)
-            val email = editTextComponent("Email", isInputEmpty)
+            val cpf = EditTextComponent("CPF", isInputEmpty)
+            val nome = EditTextComponent("Nome", isInputEmpty)
+            val email = EditTextComponent("Email", isInputEmpty)
 
-            if (isInputEmpty) {
-                Text(
-                    text = "Campos necessários",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
             val imoveis = imovelDAO.obterTodos()
             MenuImoveisComponent(imoveis){ newSelectedImovel ->
                 selectedMatricula = newSelectedImovel
@@ -109,10 +103,7 @@ fun ProprietarioScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Inserir",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Inserir")
             }
             Button(
                 onClick = {
@@ -129,10 +120,7 @@ fun ProprietarioScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Deletar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Deletar")
             }
             Button(
                 onClick = {
@@ -152,10 +140,7 @@ fun ProprietarioScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Editar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Editar")
             }
         }
     }
@@ -194,7 +179,7 @@ fun BlocoProprietario(proprietario: Proprietario, selectedCpf: String, onSelecte
             Column {
                 TextoBoldComponent("CPF: " + proprietario.cpf)
                 TextoBoldComponent("Nome: " + proprietario.nome)
-                TextoBoldComponent("Email: " +proprietario.email)
+                TextoBoldComponent("Email: " + proprietario.email)
                 TextoBoldComponent("Matricula Imovel: " + proprietario.imovel)
             }
         }

@@ -38,7 +38,8 @@ import br.com.ads.imobiliaria.ui.theme.componentes.ImagemCardComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.MenuImoveisComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TextoBoldComponent
 import br.com.ads.imobiliaria.ui.theme.componentes.TopBarComponent
-import br.com.ads.imobiliaria.ui.theme.componentes.editTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.EditTextComponent
+import br.com.ads.imobiliaria.ui.theme.componentes.TextoComponent
 
 @Composable
 fun InquilinoScreen(
@@ -64,7 +65,7 @@ fun InquilinoScreen(
             var selectedCpf by remember{mutableStateOf("")}
             var selectedMatricula by remember{mutableStateOf("")}
             val listState = rememberLazyListState()
-
+            //MOSTRAR LISTA
             LazyColumn(state = listState,
                 modifier = Modifier.heightIn(min = 250.dp, max = 250.dp)
             ) {
@@ -75,17 +76,9 @@ fun InquilinoScreen(
                 }
             }
             var isInputEmpty by rememberSaveable { mutableStateOf(false) }
-            val cpf = editTextComponent("CPF", isInputEmpty)
-            val nome = editTextComponent("Nome", isInputEmpty)
-            val valorCalcao = editTextComponent("Valor Calção", isInputEmpty)
-
-            if (isInputEmpty) {
-                Text(
-                    text = "Campos necessários",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
+            val cpf = EditTextComponent("CPF", isInputEmpty)
+            val nome = EditTextComponent("Nome", isInputEmpty)
+            val valorCalcao = EditTextComponent("Valor Calção", isInputEmpty)
 
             val imoveis = imovelDAO.obterTodos()
             MenuImoveisComponent(imoveis){ newSelectedImovel ->
@@ -100,6 +93,7 @@ fun InquilinoScreen(
                     }else{
                         isInputEmpty = true
                     }
+                    //ATUALIZAR LISTA
                     inquilinos = inquilinoDAO.obterTodos()
                 },
                 Modifier
@@ -110,15 +104,14 @@ fun InquilinoScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Inserir",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Inserir")
             }
+            //DELETAR INQULINO
             Button(
                 onClick = {
                     if(selectedCpf.isNotEmpty()){
                         inquilinoDAO.excluir(selectedCpf)
+                        //ATUALIZAR LISTA
                         inquilinos = inquilinoDAO.obterTodos()
                     }
                 },
@@ -130,11 +123,9 @@ fun InquilinoScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Deletar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Deletar")
             }
+            //EDITAR INQUILINO
             Button(
                 onClick = {
                     if(nome.isNotEmpty() && valorCalcao.isNotEmpty()){
@@ -143,6 +134,7 @@ fun InquilinoScreen(
                     }else{
                         isInputEmpty = true
                     }
+                    //ATUALIZAR LISTA
                     inquilinos = inquilinoDAO.obterTodos()
                 },
                 Modifier
@@ -153,10 +145,7 @@ fun InquilinoScreen(
                     )
                     .fillMaxWidth(),
             ) {
-                Text(
-                    text = "Editar",
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
+                TextoComponent("Editar")
             }
         }
     }

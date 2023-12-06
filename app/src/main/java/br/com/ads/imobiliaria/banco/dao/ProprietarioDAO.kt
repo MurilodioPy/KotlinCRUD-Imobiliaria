@@ -68,6 +68,5 @@ class ProprietarioDAO(context: Context) {
         cursor.close()
 
         return dados.toString()
-
     }
 }

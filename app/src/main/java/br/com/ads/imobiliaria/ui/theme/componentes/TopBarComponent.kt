@@ -22,7 +22,7 @@ fun TopBarComponent(titulo: String, navController: NavController) {
             actionIconContentColor = MaterialTheme.colorScheme.onSecondary,
         ),
         title = {
-            Texto(titulo)
+            TextoComponent(titulo)
         },
         navigationIcon = {
             IconButton(onClick = {

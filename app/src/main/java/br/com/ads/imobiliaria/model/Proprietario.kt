@@ -26,6 +26,10 @@ open class Proprietario(
     }
 
     override fun toString(): String {
-        return "CPF: " +this.cpf+" - Nome: " +this.nome + " - Email: " + this.email + " - Imovel: " +this.imovel
+        return "CPF: " +this.cpf +
+                "\nNome: " +this.nome +
+                "\nEmail: " + this.email +
+                "\nImovel: " +this.imovel + "" +
+                "\n------------------------------------------------------"
     }
 }
